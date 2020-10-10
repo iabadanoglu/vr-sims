@@ -1,21 +1,111 @@
-<html lang="en-us">
-  <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>VR Sims</title>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Interactive 3d Simulations</title>
-  </head>
-  <body>
-        <p style="font-family:verdana;font-size:100%;color:green">
-            <a href="ECircuit/Index.html">AC-DC Electric Circuit</a>
-        </p>
-        <p style="font-family:verdana;font-size:100%;color:green">
-            <a href="ElectromagneticInduction/Index.html">Electromagnetic Induction</a>
-        </p>
-        <p style="font-family:verdana;font-size:100%;color:green">
-            <a href="Transformer/Index.html">Transformer</a>
-        </p>
-        <p style="font-family:verdana;font-size:100%;color:green">
-            <a href="TPA/Index.html">Three Phase Alternator</a>
-        </p>
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="HTML5 website template">
+    <meta name="keywords" content="global, template, html, sass, jquery">
+    <meta name="author" content="Bucky Maler">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+        var loader = undefined;
+    </script>
+</head>
+<body>
+
+<!-- notification for small viewports and landscape oriented smartphones -->
+<div class="device-notification">
+    <a class="device-notification--logo" href="#0">
+        <img src="assets/img/logo.png" alt="Global">
+        <p>VR Sims</p>
+    </a>
+    <p class="device-notification--message">Global has so much to offer that we must request you orient your device to portrait
+        or find a larger screen. You won't be disappointed.</p>
+</div>
+
+<div class="perspective effect-rotate-left">
+    <div class="container">
+        <div class="outer-nav--return"></div>
+        <div id="viewport" class="l-viewport">
+            <div class="l-wrapper">
+                <header class="header">
+                    <a class="header--logo" href="#0">
+                        <img src="assets/img/logo.png" alt="Global">
+                        <p>Projeler</p>
+                    </a>
+                    <div class="header--nav-toggle">
+                        <span></span>
+                    </div>
+                </header>
+                <nav class="l-side-nav">
+                    <ul class="side-nav">
+                        <li class="is-active"><span>induction circuit</span></li>
+                        <li><span>e-circuit</span></li>
+                        <li><span>TPA</span></li>
+                        <li><span>Transformer</span></li>
+                    </ul>
+                </nav>
+                <ul class="l-main-content main-content">
+                    <li class="l-section section section--is-active">
+                        <div class="webgl-content">
+                            <div id="inductionCircuitContainer" style="width: 960px; height: 600px"></div>
+                            <div class="footer">
+                                <div class="webgl-logo"></div>
+                                <div class="fullscreen" onclick="loader.SetFullscreen(1)"></div>
+                                <div class="title">induction circuit</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="l-section section">
+                        <div class="webgl-content">
+                            <div id="eCircuitContainer" style="width: 960px; height: 600px"></div>
+                            <div class="footer">
+                                <div class="webgl-logo"></div>
+                                <div class="fullscreen" onclick="loader.SetFullscreen(1)"></div>
+                                <div class="title">eCircuit</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="l-section section">
+                        <div class="webgl-content">
+                            <div id="tpaContainer" style="width: 960px; height: 600px"></div>
+                            <div class="footer">
+                                <div class="webgl-logo"></div>
+                                <div class="fullscreen" onclick="loader.SetFullscreen(1)"></div>
+                                <div class="title">TPA</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="l-section section">
+                        <div class="webgl-content">
+                            <div id="transformatorContainer" style="width: 960px; height: 600px"></div>
+                            <div class="footer">
+                                <div class="webgl-logo"></div>
+                                <div class="fullscreen" onclick="loader.SetFullscreen(1)"></div>
+                                <div class="title">Transformer</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <ul class="outer-nav">
+        <li class="is-active">induction circuit</li>
+        <li>e-circuit</li>
+        <li>tpa</li>
+        <li>transformer</li>
+    </ul>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
+<script src="assets/js/vendor/hammer-2.0.8.js"></script>
+<script src="assets/js/functions.js"></script>
+</body>
 </html>
