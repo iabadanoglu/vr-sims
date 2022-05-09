@@ -1,125 +1,111 @@
-<!DOCTYPE html><html style=margin:0;padding:0;><head><meta charset=utf-8><title>SIMMER.io</title><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,minimal-ui"><script>(() => {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>VR Sims</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="HTML5 website template">
+    <meta name="keywords" content="global, template, html, sass, jquery">
+    <meta name="author" content="Bucky Maler">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+        var loader = undefined;
+    </script>
+</head>
+<body>
 
-        window.customSite = {};
+<!-- notification for small viewports and landscape oriented smartphones -->
+<div class="device-notification">
+    <a class="device-notification--logo" href="#0">
+        <img src="assets/img/logo.png" alt="Global">
+        <p>VR Sims</p>
+    </a>
+    <p class="device-notification--message">Global has so much to offer that we must request you orient your device to portrait
+        or find a larger screen. You won't be disappointed.</p>
+</div>
 
-        function r(tagName, attrs){
-          const ele = document.createElement(tagName);
-          attrs = attrs || {};
-          Object.keys(attrs).forEach(key => {
-            ele.setAttribute(key, attrs[key]);
-          });
-          document.getElementsByTagName('head')[0].appendChild(ele);
-        }
+<div class="perspective effect-rotate-left">
+    <div class="container">
+        <div class="outer-nav--return"></div>
+        <div id="viewport" class="l-viewport">
+            <div class="l-wrapper">
+                <header class="header">
+                    <a class="header--logo" href="#0">
+                        <img src="assets/img/logo.png" alt="Global">
+                        <p>Projeler</p>
+                    </a>
+                    <div class="header--nav-toggle">
+                        <span></span>
+                    </div>
+                </header>
+                <nav class="l-side-nav">
+                    <ul class="side-nav">
+                        <li class="is-active"><span>induction circuit</span></li>
+                        <li><span>e-circuit</span></li>
+                        <li><span>TPA</span></li>
+                        <li><span>Transformer</span></li>
+                    </ul>
+                </nav>
+                <ul class="l-main-content main-content">
+                    <li class="l-section section section--is-active">
+                        <div class="webgl-content">
+                            <div id="inductionCircuitContainer" style="width: 960px; height: 600px"></div>
+                            <div class="footer">
+                                <div class="webgl-logo"></div>
+                                <div class="fullscreen" onclick="loader.SetFullscreen(1)"></div>
+                                <div class="title">induction circuit</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="l-section section">
+                        <div class="webgl-content">
+                            <div id="eCircuitContainer" style="width: 960px; height: 600px"></div>
+                            <div class="footer">
+                                <div class="webgl-logo"></div>
+                                <div class="fullscreen" onclick="loader.SetFullscreen(1)"></div>
+                                <div class="title">eCircuit</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="l-section section">
+                        <div class="webgl-content">
+                            <div id="tpaContainer" style="width: 960px; height: 600px"></div>
+                            <div class="footer">
+                                <div class="webgl-logo"></div>
+                                <div class="fullscreen" onclick="loader.SetFullscreen(1)"></div>
+                                <div class="title">TPA</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="l-section section">
+                        <div class="webgl-content">
+                            <div id="transformatorContainer" style="width: 960px; height: 600px"></div>
+                            <div class="footer">
+                                <div class="webgl-logo"></div>
+                                <div class="fullscreen" onclick="loader.SetFullscreen(1)"></div>
+                                <div class="title">Transformer</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <ul class="outer-nav">
+        <li class="is-active">induction circuit</li>
+        <li>e-circuit</li>
+        <li>tpa</li>
+        <li>transformer</li>
+    </ul>
+</div>
 
-        window.renderHeaderElement = r;
-
-        window.isAlpha = true; //window.localStorage.getItem('isAlpha') === 'true';
-        window.simmerFlags = JSON.parse(window.localStorage.getItem('simmerFlags') || '{}');
-
-        // const indexBaseUrl = 'http://localhost:8096';
-        const indexBaseUrl = 'https://index.simmer.io';
-
-        window.initialPathname = window.location.pathname;
-
-        window.customSiteGlobals = {
-          isCanon:true,
-          baseUrl:null,
-          indexBaseUrl
-        };
-        let alreadySetUrl = false;
-        const csg = window.customSiteGlobals;
-        if (window.location.hostname === 'sharemygame.com' || window.location.hostname === 'dontsharemygame.com'){
-          csg.isCanon = false;
-          csg.baseUrl = 'https://theroccob.github.io/custom-smg-simmer/customSite/';
-          csg.indexBaseUrl += '/smg'
-          alreadySetUrl = true;
-        }
-        else if (window.location.hostname === 'gamedevhqtest.simmer.io'){
-          csg.isCanon = false;
-          csg.baseUrl = 'https://theroccob.github.io/custom-gdhq-simmer/customSite/';
-          alreadySetUrl = true;
-        }
-        if (window.localStorage.getItem('customSiteUrl')){
-          csg.isCanon = false;
-          csg.baseUrl = window.localStorage.getItem('customSiteUrl');
-          if (!alreadySetUrl){
-            csg.indexBaseUrl += '/smg'
-          }
-        }
-        else if (!alreadySetUrl){
-          csg.indexBaseUrl += '/simmer'
-        }
-
-        //todo: it might be more performant to render out the front page js via the "host" function.
-        const src = csg.indexBaseUrl + '/frontPage.js';
-        r('script', {src})
-
-        window.customSiteTable = {
-          simmer: {
-            friendlyName: 'SIMMER.io',
-            url: 'https://simmer.io'
-          },
-          smg : {
-            friendlyName: 'ShareMyGame.com',
-            url: 'https://sharemygame.com'
-          },
-          gdhq: {
-            friendlyName: 'GameDevHQ',
-            url: 'https://gamedevhqtest.simmer.io'
-          }
-        };
-
-        //hide the loading placeholder graphics if this is not simmer.io
-        if (!csg.isCanon){
-          const customStyleTag = document.createElement('style');
-          const customStyleContents = `#sm-loading-placeholder { display:none !important}`;
-          document.head.appendChild(customStyleTag);
-          customStyleTag.appendChild(document.createTextNode(customStyleContents));
-        }
-
-        if(csg.isCanon){
-          r('link', {rel:"icon", type:"image/png", href:"/static/favicon/favicon-196x196.png", sizes:"196x196"});
-          r('link', {rel:"icon", type:"image/png", href:"/static/favicon/favicon-96x96.png", sizes:"96x96"});
-          r('link', {rel:"icon", type:"image/png", href:"/static/favicon/favicon-32x32.png", sizes:"32x32"});
-          r('link', {rel:"icon", type:"image/png", href:"/static/favicon/favicon-16x16.png", sizes:"16x16"});
-          r('link', {rel:"icon", type:"image/png", href:"/static/favicon/favicon-128.png", sizes:"128x128"});
-          r('link', {rel:"apple-touch-icon-precomposed", sizes:"57x57", href:"/static/favicon/apple-touch-icon-57x57.png"});
-          r('link', {rel:"apple-touch-icon-precomposed", sizes:"114x114", href:"/static/favicon/apple-touch-icon-114x114.png"});
-          r('link', {rel:"apple-touch-icon-precomposed", sizes:"72x72", href:"/static/favicon/apple-touch-icon-72x72.png"});
-          r('link', {rel:"apple-touch-icon-precomposed", sizes:"144x144", href:"/static/favicon/apple-touch-icon-144x144.png"});
-          r('link', {rel:"apple-touch-icon-precomposed", sizes:"60x60", href:"/static/favicon/apple-touch-icon-60x60.png"});
-          r('link', {rel:"apple-touch-icon-precomposed", sizes:"120x120,", href:"/static/favicon/apple-touch-icon-120x120.png"});
-          r('link', {rel:"apple-touch-icon-precomposed", sizes:"76x76", href:"/static/favicon/apple-touch-icon-76x76.png"});
-          r('link', {rel:"apple-touch-icon-precomposed", sizes:"152x152", href:"/static/favicon/apple-touch-icon-152x152.png"});
-          r('meta', {name:"msapplication-TileColor", content:"#FFFFFF"});
-          r('meta', {name:"msapplication-TileImage", content:"/static/favicon/mstile-144x144.png"});
-          r('meta', {name:"msapplication-square70x70logo", content:"/static/favicon/mstile-70x70.png"});
-          r('meta', {name:"msapplication-square150x150logo", content:"/static/favicon/mstile-150x150.png"});
-          r('meta', {name:"msapplication-wide310x150logo", content:"/static/favicon/mstile-310x150.png"});
-          r('meta', {name:"msapplication-square310x310logo", content:"/static/favicon/mstile-310x310.png"});
-          r('meta', {name:"theme-color", content:"transparent"});
-          r('meta', {name:"application-name", content:"SIMMER.io"});
-        }
-      })();</script><link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons" rel=stylesheet type=text/css>
-
-<meta property="og:title" content="Play AC-DC Electric Circuit in your browser | SIMMER.io"/>
-<meta property="og:site_name" content="SIMMER.io" />
-<meta property="og:image" content="https://simmercdn.com/unity/bx75cv9kbdb3LfnCq8UXv12EEeA3/content/25ed5d0e-72b1-6a4c-11c9-4124a0509d2b/screens/0.png" />
-<meta property="og:description" content="Alternative and direct current simulation." />
-<meta property="description" content="Play AC-DC Electric Circuit in your browser | Alternative and direct current simulation. | SIMMER.io is a website for Unity Developers to Share WebGL Games">
-<meta name="twitter:card" content="summary_large_image" />
-<link rel="alternate" type="application/json+oembed" href="https://simmer.io/oembed?url=https://simmer.io/@iao/ec" title="AC-DC Electric Circuit | SIMMER.io">
-
-<script async src=//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js></script><script>if (window.location.origin === 'simmer.io' && !window.location.href.endsWith('/signup/standalone')){
-        (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-6755869701423650",
-          enable_page_level_ads: true
-        });
-      }</script><script>if (window.location.pathname !== '/'){
-        setTimeout(function(){
-          var placeholder = document.querySelector('#sm-loading-placeholder-inner');
-          if (placeholder){
-            placeholder.style.display = 'none';
-          }
-        }, 0);
-      }</script><link href=/static/css/vendors~app.69587908e1a598c63989.css rel=stylesheet><link href=/static/css/app.b50ff86a6408cbb42637.css rel=stylesheet></head><body style=background-color:#111111;margin:0;padding:0;><div id=sm-loading-placeholder style="margin-left:auto; margin-right:auto;max-width:1440px;"><div style=background-color:#ece8ed;height:48px;></div><div id=sm-loading-placeholder-inner><div style=background-color:#2d012f;height:450px;><div style=height:40px;color:white;></div><img src=/static/images/simmeryellowtiny.png style="display:block; image-rendering:pixelated;width:125px; height:125px;margin-top:33px; margin-left:auto; margin-right:auto"><h1 style="font-family:Roboto,sans-serif;font-weight:100; font-size:45px; text-align:center;margin-top:16px; margin-bottom:16px;color:white;">simmer.io</h1><div style=font-family:Roboto,sans-serif;font-weight:400;text-align:center;color:white;font-size:16px;>A place for Unity developers to share WebGL Games.</div></div><div style=background-color:#d81159;height:1px;></div><div style=background-color:#1a011c;height:37px;></div><div style=background-color:#d81159;height:1px;></div><div style=background-color:#1d1f21;height:500px></div></div></div><div id=app></div><script type=text/javascript src=/static/js/1.c2ce1756bf2d83a573fc.js></script><script type=text/javascript src=/static/js/app.a3e450df2e5cdaa87e7e.js></script></body><link href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css rel=stylesheet></html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
+<script src="assets/js/vendor/hammer-2.0.8.js"></script>
+<script src="assets/js/functions.js"></script>
+</body>
+</html>
