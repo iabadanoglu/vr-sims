@@ -1,1 +1,1 @@
-#Electric circuit simulations (ac-dc circuits, transformators, induction circuirs, three phase alternator circuit...) 
+#Electric circuit simulations (ac-dc circuits, transformers, induction circuits, three phase generator circuit...) 
